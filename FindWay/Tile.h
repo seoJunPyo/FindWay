@@ -1,12 +1,7 @@
 #pragma once
-#define GRID_WIDTH 200
-#define GRID_HEIGHT 100
-
-struct Position
-{
-	int _x = -1;
-	int _y = -1;
-};
+#define GRID_WIDTH 300
+#define GRID_HEIGHT 200
+#include "Heap.h"
 
 struct Tile
 {
@@ -18,7 +13,7 @@ struct Tile
 	Position _parant;
 };
 
-extern Heap<Position> g_OpenList;
+extern Heap<Position, double> g_OpenList;
 
 extern int GRID_SIZE;
 extern Tile g_Tile[][GRID_WIDTH];
@@ -30,5 +25,5 @@ extern bool g_bFind;
 
 Position GetTilePosition(LPARAM lParam);
 double CompareF(Position pos1, Position pos2);
-void Find_Path();
+bool Find_Path();
 

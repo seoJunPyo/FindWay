@@ -1,17 +1,16 @@
 #pragma once
-#pragma once
 #include <malloc.h>
-template <typename T>
+template <typename T, typename U>
 class Heap
 {
 private:
 	struct Node
 	{
 		T _data;
-		int _key;
+		U _key;
 	};
 
-	Node* CreateNode(T data, int key)
+	Node* CreateNode(T data, U key)
 	{
 		Node* new_node = (Node*)malloc(sizeof(Node));
 		new_node->_data = data;
@@ -34,16 +33,16 @@ private:
 
 	int RightChild(int idx)
 	{
-		return 2 * idx;
+		return 2 * idx + 2;
 	}
 
-	int Parant(int idx)
+	int Parent(int idx)
 	{
 		return (idx - 1) / 2;
 	}
 
 public:
-	Heap(int capacity = 10000) : _size(0), _capacity(capacity)
+	Heap(int capacity = 1000) : _size(0), _capacity(capacity)
 	{
 		_list = (Node**)malloc(sizeof(Node*) * capacity);
 	}
@@ -76,7 +75,7 @@ public:
 		_size = 0;
 	}
 
-	bool Insert(T data, int key)
+	bool Insert(T data, U key)
 	{
 		if (isFull())
 			return false;
@@ -84,12 +83,12 @@ public:
 		_list[_size++] = CreateNode(data, key);
 
 		int cur = _size - 1;
-		int parant = Parant(cur);
-		while (_list[parant]->_key > _list[cur]->_key && cur > 0)
+		int parent = Parent(cur);
+		while (_list[parent]->_key > _list[cur]->_key && cur > 0)
 		{
-			Swap(parant, cur);
-			cur = parant;
-			parant = Parant(cur);
+			Swap(parent, cur);
+			cur = parent;
+			parent = Parent(cur);
 		}
 
 		return true;
@@ -97,16 +96,24 @@ public:
 
 	bool DeleteMin(T* min)
 	{
+		return Delete(0, min);
+	}
+
+	bool Delete(int idx, T * deleted = nullptr)
+	{
 		if (isEmpty())
 			return false;
 
-		Node* root = _list[0];
-		*min = root->_data;
-		free(root);
+		if (deleted != nullptr)
+			*deleted = _list[idx]->_data;
 
-		_list[0] = _list[--_size];
+		Node* target = _list[idx];
+		free(target);
 
-		int cur = 0;
+		_list[idx] = _list[--_size];
+
+
+		int cur = idx;
 		while (1)
 		{
 			int selected = 0;
@@ -134,6 +141,10 @@ public:
 			else
 				break;
 		}
+
+		return true;
+
+
 	}
 
 	const T operator[](int idx) const

@@ -8,7 +8,7 @@
 -> 스타트 포인트를 자료구조 단 한번 넣어야됨.
 -> 더블 클릭으로 스타트 포인트 재설정시, 기존 자료구조 내용을 비우고 플래그를 false로 설정한다.
 -> 시작 플래그가 설정되어 있으면, 마우스 업, 도착지 변경등이 발생하면 길을 다시 찾는다.
--> 이를 위해서는 자료구조를 리셋하고, 맵 정보에 visited와 parant의 초기화가 필요함. 장애물 정보는 건드리지 않는다.
+-> 이를 위해서는 자료구조를 리셋하고, 맵 정보에 visited와 parent의 초기화가 필요함. 장애물 정보는 건드리지 않는다.
 
 엔터 입력 시, 길찾기 루프를 한번 씩 진행.
 -> 길을 찾은 경우 더 이상 길찾기를 진행하지 않는다.
@@ -21,11 +21,17 @@
 
 #include "framework.h"
 #include "FindWay.h"
+#include <windowsx.h>
+#include "Scroll.h"
 #include "Handler.h"
+#include "Map.h"
+#include "Mouse.h"
+
 
 #define MAX_LOADSTRING 100
 
-HINSTANCE hInst;                                
+HINSTANCE hInst;        
+Mouse g_Mouse;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -82,10 +88,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    int xPos = GET_X_LPARAM(lParam);
+    int yPos = GET_Y_LPARAM(lParam);
+
     switch (message)
     {
     case WM_CREATE:
         WCreate(hWnd, wParam, lParam);
+        break;
+
+    case WM_SIZE :
+        WSize(hWnd, wParam, lParam);
         break;
 
     case WM_PAINT:
@@ -126,6 +139,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case VK_SPACE :
             Key_Space(hWnd, wParam, lParam);
             break;
+        case 0x41 :
+            Key_A(hWnd, wParam, lParam);
+            break;
+
+        case 0x44 :
+            Key_D(hWnd, wParam, lParam);
+            break;
+
+        case 0x53 :
+            Key_S(hWnd, wParam, lParam);
+            break;
+
+        case 0x57 :
+            Key_W(hWnd, wParam, lParam);
+            break;
+
         default:
             break;
         }

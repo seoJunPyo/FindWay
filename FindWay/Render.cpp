@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "Heap.h"
 #include "Tile.h"
+#include "Scroll.h"
 #include "Handler.h"
 
 HPEN g_hGridPen;
@@ -24,11 +25,6 @@ void RenderVisited(HDC hdc);
 void RenderPath(HDC hdc);
 void RenderOther(HDC hdc);
 
-void Clear()
-{
-    PatBlt(g_hMemDC, 0, 0, g_MemDCRect.right, g_MemDCRect.bottom, WHITENESS);
-}
-
 void Render()
 {
     RenderGrid(g_hMemDC);
@@ -44,9 +40,9 @@ void Render()
 
 void Flip(HWND hWnd, PAINTSTRUCT* ps)
 {
-    HDC hdc = BeginPaint(hWnd, ps);
-    BitBlt(hdc, 0, 0, g_MemDCRect.right, g_MemDCRect.bottom, g_hMemDC, 0, 0, SRCCOPY);
-    EndPaint(hWnd, ps);
+  //  HDC hdc = BeginPaint(hWnd, ps);
+  //  BitBlt(hdc, 0, 0, g_MemDCRect.right, g_MemDCRect.bottom, g_hMemDC, 0, 0, SRCCOPY);
+  //  EndPaint(hWnd, ps);
 }
 
 void Init_Pen()
@@ -79,7 +75,7 @@ void Init_DoubleBuffer(HWND hWnd)
     HDC hdc = GetDC(hWnd);
     GetClientRect(hWnd, &g_MemDCRect);
 
-    g_hMemDCBitmap = CreateCompatibleBitmap(hdc, g_MemDCRect.right , g_MemDCRect.bottom);
+    g_hMemDCBitmap = CreateCompatibleBitmap(hdc, GRID_SIZE * GRID_WIDTH , GRID_SIZE * GRID_HEIGHT);
     g_hMemDC = CreateCompatibleDC(hdc);
 
     ReleaseDC(hWnd, hdc);

@@ -1,5 +1,6 @@
 #pragma once
 void WCreate(HWND hWnd, WPARAM wParam, LPARAM lParam);
+void WSize(HWND hWnd, WPARAM wParam, LPARAM lParam);
 void WPaint(HWND hWnd, WPARAM wParam, LPARAM lParam);
 void WDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
@@ -11,7 +12,11 @@ void Mouse_Move(HWND hWnd, WPARAM wParam, LPARAM lParam);
 void Mouse_Wheel(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
 void Key_Space(HWND hWnd, WPARAM wParam, LPARAM lParam);
+void Key_W(HWND hWnd, WPARAM wParam, LPARAM lParam);
+void Key_A(HWND hWnd, WPARAM wParam, LPARAM lParam);
+void Key_S(HWND hWnd, WPARAM wParam, LPARAM lParam);
+void Key_D(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
-extern bool g_bScroll;
-extern int g_xCurrent;
-extern int g_yCurrent;
+extern Scroll g_Scroll;
+extern Map g_map;
+extern AStar g_Astar;

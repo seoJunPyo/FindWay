@@ -27,12 +27,6 @@
     <ClInclude Include="FindWay.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Queue.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -42,10 +36,19 @@
     <ClInclude Include="Render.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PQ.h">
+    <ClInclude Include="Heap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Heap.h">
+    <ClInclude Include="Scroll.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +65,19 @@
     <ClCompile Include="Render.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PQ.cpp">
+    <ClCompile Include="Scroll.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.h">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
